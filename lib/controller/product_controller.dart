@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:listview_shopping_setstate/model/product_response.dart';
 
 class ProductController extends GetxController {
-  TextEditingController searchController = TextEditingController();
+  var searchController = TextEditingController();
 
-  var productList = <ProductResponse>[].obs;
-  var productTempList = <ProductResponse>[];
+  var productTempList = List<ProductResponse>.empty(growable: true);
+  var productList = List<ProductResponse>.empty(growable: true).obs;
 
-  var totalAmount = RxDouble(0);
+  RxDouble totalAmount = 0.0.obs;
 
   @override
   void onInit() {
@@ -49,7 +49,10 @@ class ProductController extends GetxController {
   }
 
   _totalAmountGet() {
-    totalAmount.value = productList.fold(0, (previous, current) => previous + current.price * current.quantity.value);
+    totalAmount.value = productList.fold(
+        0,
+        (previous, current) =>
+            previous + current.price * current.quantity.value);
   }
 }
 
