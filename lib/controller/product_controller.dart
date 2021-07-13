@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:listview_shopping_setstate/model/product_response.dart';
 
 class ProductController extends GetxController {
-  var searchController = TextEditingController();
+  late TextEditingController? searchController = TextEditingController();
 
-  var productTempList = List<ProductResponse>.empty(growable: true);
-  var productList = List<ProductResponse>.empty(growable: true).obs;
+  var productTempList = List<ProductResponse?>.empty(growable: true);
+  var productList = List<ProductResponse?>.empty(growable: true).obs;
 
-  RxDouble totalAmount = 0.0.obs;
+  RxDouble? totalAmount = 0.0.obs;
 
   @override
   void onInit() {
@@ -22,37 +22,37 @@ class ProductController extends GetxController {
   }
 
   favourite(ProductResponse productResponse) {
-    productResponse.isFavourite.value = !productResponse.isFavourite.value;
+    productResponse.isFavourite!.value = !productResponse.isFavourite!.value;
   }
 
   quantityAdd(ProductResponse productResponse) {
-    productResponse.quantity++;
+    productResponse.quantity =  productResponse.quantity! + 1;
     _totalAmountGet();
   }
 
   quantityMinus(ProductResponse productResponse) {
-    if (productResponse.quantity.value > 0) {
-      productResponse.quantity--;
+    if (productResponse.quantity!.value > 0) {
+      productResponse.quantity =  productResponse.quantity! - 1;
       _totalAmountGet();
     }
   }
 
-  productNameSearch(String name) {
-    if (name.isEmpty) {
+  productNameSearch(String? name) {
+    if (name!.isEmpty) {
       productList.value = productTempList;
     } else {
       productList.value = productTempList
           .where((element) =>
-              element.productName.toLowerCase().contains(name.toLowerCase()))
+              element!.productName!.toLowerCase().contains(name.toLowerCase()))
           .toList();
     }
   }
 
   _totalAmountGet() {
-    totalAmount.value = productList.fold(
+    totalAmount!.value = productList.fold(
         0,
         (previous, current) =>
-            previous + current.price * current.quantity.value);
+            previous + (current!.price! * current.quantity!.value));
   }
 }
 

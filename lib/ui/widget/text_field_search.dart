@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class TextFieldSearch extends StatelessWidget {
-  final TextEditingController textEditingController;
-  final ValueChanged<String> onChanged;
-  final VoidCallback callBackClear, callBackPrefix, callBackSearch;
-  final isPrefixIconVisible;
-  final String hintText;
+  final TextEditingController? textEditingController;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? callBackPrefix, callBackSearch;
+  final bool? isPrefixIconVisible;
+  final String? hintText;
 
   TextFieldSearch(
-      {@required this.textEditingController,
-      @required this.onChanged,
-      this.callBackClear,
+      {required this.textEditingController,
+      required this.onChanged,
       this.isPrefixIconVisible = false,
       this.callBackSearch,
       this.callBackPrefix,
@@ -32,7 +31,7 @@ class TextFieldSearch extends StatelessWidget {
                 isCollapsed: true,
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-                prefixIcon: isPrefixIconVisible
+                prefixIcon: isPrefixIconVisible!
                     ? IconButton(
                         icon: Icon(Icons.search, size: 20, color: Colors.blue),
                         onPressed: callBackPrefix)
@@ -50,7 +49,7 @@ class TextFieldSearch extends StatelessWidget {
                     fontSize: 15,
                     color: Colors.black54,
                     textBaseline: TextBaseline.alphabetic),
-                hintText: hintText,
+                hintText: hintText!,
                 fillColor: Colors.grey.withOpacity(0.1))));
   }
 }

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
 class ProductResponse {
-  String id, productName, productDescription;
-  double price;
+  String? id, productName, productDescription;
+  double? price;
 
   ProductResponse(
       {this.id,
@@ -15,9 +15,9 @@ class ProductResponse {
     this.setIsFavourite(isFavourite);
   }
 
-  RxInt quantity = RxInt(0);
-  setQuantity(int value) => quantity.value = value;
+  RxInt? quantity = RxInt(0);
+  setQuantity(int? value) => quantity!.value = value!;
 
-  RxBool isFavourite = RxBool(false);
-  setIsFavourite(bool value) => isFavourite.value = value;
+  RxBool? isFavourite = RxBool(false);
+  setIsFavourite(bool? value) => isFavourite!.value = value!;
 }
